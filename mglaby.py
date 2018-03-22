@@ -24,11 +24,11 @@ pygame.display.set_caption(title)
 
 
 # displaying a background for the tile of the maze
-Background_Tiles = pygame.image.load(background).convert()
-window.blit(Background_Tiles,(25,25) )  
+background_tiles = pygame.image.load(background).convert()
+window.blit(background_tiles,(25,25) )
 
 # displaying the character .png
-Char_img = pygame.image.load(mg).convert_alpha()  # Add the png and transparency
+char_img = pygame.image.load(mg).convert_alpha()  # Add the png and transparency
 
 # displaying the walls of the maze
 wall = pygame.image.load(wall).convert()
