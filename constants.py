@@ -1,9 +1,9 @@
 """Constants for Mc Gyver's Game"""
 
 #WINDOW SIZE
-NUMBER_SPRITE_SIDE = 15
-SPRITE_SIZE = 30
-WINDOW_SIDE = NUMBER_SPRITE_SIDE * SPRITE_SIZE
+Nbr_Sprite_Side = 15
+Sprite_Size = 30
+WINDOW_SIDE = Nbr_Sprite_Side * Sprite_Size
 
 #TITLE
 title = "Mac Gyver's Labyrinthe"
