@@ -1,7 +1,6 @@
-
 # level creation
 
-import pygame  # needed ?
+import pygame
 
 from pygame.locals import *
 
@@ -11,45 +10,42 @@ import random
 
 
 class Level:
-	"""designing the maze"""
-	def __init__(self):
-		self.file = "map.txt"
-		self.structure = []
+    """designing the maze"""
+    def __init__(self):
+        self.file = "map.txt"
+        self.structure = []
 
-	def generate(self):
-		with open(self.file, "r") as file:  # read only on the map.txt file
-			level_structure = []            # creating the level design as an empty list
+    def generate(self):
+        with open(self.file, "r") as file:  # read only on the map.txt file
+            level_structure = []            # level as an empty list
 
+            for line in file:
+                line_level = []
 
-			for line in file:
-				line_level = []
+                # adding sprites in lines list, then lines in structure list
+                for sprite in line:
+                    if sprite != "\n":  # eliminating line return
+                        line_level.append(sprite)
+                level_structure.append(line_level)
+            self.structure = level_structure
 
-				#adding sprites in lines list, then lines in structure list
-				for sprite in line:
-					if sprite != "\n" : #eliminating line return
-						line_level.append(sprite)
-				level_structure.append(line_level)
-			self.structure = level_structure
+    def display(self, window):
+        wall = pygame.image.load('images/wall.png').convert()
+        finish = pygame.image.load('images/finish.png').convert_alpha()
 
-	def display(self,window):
-		wall = pygame.image.load('images/wall.png').convert()
-		finish = pygame.image.load('images/finish.png').convert_alpha()
+        num_line = 0
+        for line in self.structure:
+            num_case = 0
+            for sprite in line:
+                x = num_case * Sprite_Size    # sprites localisation
+                y = num_line * Sprite_Size
+                if sprite == 'w':             # w = wall in map.txt
+                    window.blit(wall, (x, y))
+                elif sprite == 'f':
+                    window.blit(finish, (x, y))
+                num_case = num_case + 1
 
-		num_line=0
-		for line in self.structure:
-			num_case = 0
-			for sprite in line:
-				x = num_case * Sprite_Size    #sprites localisation
-				y = num_line * Sprite_Size
-				if sprite == 'w':             # w = wall in map.txt
-					window.blit(wall, (x,y))
-				elif sprite == 'f':
-					window.blit(finish, (x,y))
-				num_case = num_case +1
-
-			num_line = num_line +1
-
-
+            num_line = num_line + 1
 
 
 class Char:
@@ -68,11 +64,10 @@ class Char:
     def mooving(self, direction):
         if direction == 'right':
             if self.case_x < (Nbr_Sprite_Side - 1):  # stop at border !
-                if self.level.structure[self.case_y][self.case_x + 1] != 'w':  #wallee ?
+                if self.level.structure[self.case_y][self.case_x + 1] != 'w':
                     self.case_x += 1
                     self.x = self.case_x * Sprite_Size
                     print(self.x, self.y)
-
 
         if direction == 'left':
             if self.case_x > 0:
@@ -84,7 +79,8 @@ class Char:
         if direction == 'up':
             if self.case_y > 0:
                 if self.level.structure[self.case_y - 1][self.case_x] != 'w':
-                    if self.level.structure[self.case_y - 1][self.case_x] != 't': #can't go in the black margin
+                    if (self.level.structure[self.case_y - 1]
+                            [self.case_x] != 't'):
                         self.case_y -= 1
                         self.y = self.case_y * Sprite_Size
                         print(self.x, self.y)
@@ -97,7 +93,6 @@ class Char:
                     print(self.x, self.y)
 
 
-
 class Loot:  # the class for the items
     def __init__(self, Loot_Image, level):
         self.case_y = 0
@@ -108,7 +103,7 @@ class Loot:  # the class for the items
         self.loaded = True
         self.Loot_Image = Loot_Image
 
-    def display(self, Loot_Image, Window): #randomisation of item places
+    def display(self, Loot_Image, Window):  # randomisation of item places
         while self.loaded:
             self.case_x = random.randint(0, 14)
             self.case_y = random.randint(0, 14)

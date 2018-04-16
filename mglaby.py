@@ -108,13 +108,13 @@ while continue_game:
         window.blit(needle.Loot_Image, (needle.x, needle.y))
     if (mac.x, mac.y) == (needle.x, needle.y):
         NeedleNotPicked = False
-        window.blit(needle.Loot_Image, (10, 0))
+        window.blit(needle.Loot_Image, (15, 0))
 
     if EtherNotPicked:
         window.blit(ether.Loot_Image, (ether.x, ether.y))
     if (mac.x, mac.y) == (ether.x, ether.y):
         EtherNotPicked = False
-        window.blit(ether.Loot_Image, (30, 0))
+        window.blit(ether.Loot_Image, (35, 0))
 
     # refreshing screen
     pygame.display.flip()
