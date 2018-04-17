@@ -12,6 +12,7 @@ import random
 class Level:
     """designing the maze"""
     def __init__(self):
+        """charging map files with possibility of change later"""
         self.file = "map.txt"
         self.structure = []
 
@@ -62,6 +63,7 @@ class Char:
 
     # Keyboard touch used to moove MacGyver:
     def mooving(self, direction):
+        """Defining what happens on Keypress with walls exception"""
         if direction == 'right':
             if self.case_x < (Nbr_Sprite_Side - 1):  # stop at border !
                 if self.level.structure[self.case_y][self.case_x + 1] != 'w':
@@ -94,7 +96,9 @@ class Char:
 
 
 class Loot:  # the class for the items
+    """def the displaying of loots"""
     def __init__(self, Loot_Image, level):
+        """initial positions of loots"""
         self.case_y = 0
         self.case_x = 0
         self.x = 0
@@ -104,6 +108,7 @@ class Loot:  # the class for the items
         self.Loot_Image = Loot_Image
 
     def display(self, Loot_Image, Window):  # randomisation of item places
+        """loots positions randomize on 0 tiles"""
         while self.loaded:
             self.case_x = random.randint(0, 14)
             self.case_y = random.randint(0, 14)
